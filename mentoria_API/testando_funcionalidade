@@ -1,0 +1,34 @@
+from mentor import Mentor
+from mentorando import Mentorando
+from mentoria import Mentoria
+from db_connector import DBConnector
+
+import sqlite3
+
+db = DBConnector("mentorias.db")
+
+# Criando instâncias de Mentor e Mentorando
+novo_mentor = Mentor("Renan", "https://www.linkedin.com/in/renan/")
+novo_mentorado = Mentorando("João", "https://www.linkedin.com/in/joao/")
+
+# Salvando as instâncias no banco de dados
+novo_mentor.save(db.connect())
+novo_mentorado.save(db.connect())
+
+# Obtendo e imprimindo um mentor específico
+print(Mentor.get_by_id(1, db.connect()).to_dict())
+
+# Obtendo e imprimindo todos os mentores
+print(Mentor.get_all(db.connect()))
+
+# Obtendo e imprimindo um mentorando específico
+print(Mentorando.get_by_id(1, db.connect()).to_dict())
+
+# Obtendo e imprimindo todos os mentorandos
+print(Mentorando.get_all(db.connect()))
+
+# Obtendo e imprimindo uma mentoria específica
+print(Mentoria.get_by_id(1, db.connect()).to_dict())
+
+# Obtendo e imprimindo todas as mentorias
+print(Mentoria.get_all(db.connect()))
